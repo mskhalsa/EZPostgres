@@ -1,0 +1,34 @@
+username: default_user    # these can be overridden by .env
+password: default_pass
+database: default_db
+tables:
+  - name: mytable
+    columns:
+      - name: id
+        type: SERIAL
+        primary_key: true
+      - name: data
+        type: JSONB
+        not_null: false
+      - name: extra
+        type: JSONB
+        not_null: true
+  - name: anothertable
+    columns:
+      - name: id
+        type: SERIAL
+        primary_key: true
+      - name: description
+        type: TEXT
+        not_null: true
+        unique: true
+        comment: "A brief description"
+      - name: created_at
+        type: TIMESTAMP
+        default: CURRENT_TIMESTAMP
+      - name: user_id
+        type: INTEGER
+        not_null: true
+        foreign_key:
+          table: mytable
+          column: id
